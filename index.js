@@ -1,4 +1,4 @@
-require('dotenv').config();
+const config = require('./config.json');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
@@ -8,7 +8,8 @@ Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
 
-const TOKEN = process.env.TOKEN;
+const TOKEN = config.token;
+
 
 bot.login(TOKEN);
 
@@ -27,10 +28,6 @@ bot.on('message', msg => {
     bot.commands.get(command).execute(msg, args);
   } catch (error) {
     console.error(error);
-<<<<<<< Updated upstream
-    msg.reply('there was an xxxxxxxxxxxxxxxxxxxxxxx trying to execute that command!');
-=======
-    msg.reply('there was an XXXXXXXXXXXXXXXXXX trying to execute that command!');
->>>>>>> Stashed changes
+    msg.reply('you dummy that command didn\'t work!');
   }
 });
